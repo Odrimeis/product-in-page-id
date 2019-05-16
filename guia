@@ -1,0 +1,63 @@
+Cuando queremos vender un producto específico en una página en concreto (por ejemplo una Landing page) se nos plantean varías necesidades.
+1- Primero ha de estar el producto ya en el carrito, pero sin que lo añada el cliente. Es decir, cuando entremos a la Landin gpage ha de estar ya el producto en el carrito. Y cuando se abandone la landing eliminar el producto.
+2- Dependiendo de en que landing nos encontremos ha de meter un producto u otro, así que podemos traducir para que se entienda el lenguaje PHP:
+
+ Si nos encontramos en la pagina con ID 9(ejemplo) hay que añadir al carrito el producto con ID 154 (ejemplo). Si no estamos en la landing con ID 9 eliminar el producto con ID 154.
+
+Dicho con Lenguaje PHP:
+
+add_action( 'template_redirect', 'add_product_to_cart' );
+function add_product_to_cart() {
+	$product_id = 154; //replace with your own product id
+	$cartId = WC()->cart->generate_cart_id( 154 );
+	$cartItemKey = WC()->cart->find_product_in_cart( $cartId );
+
+	if (is_page( 9 ) ) {
+		//check if product already in cart
+               if(!$cartItemKey){
+		    WC()->cart->add_to_cart( $product_id );
+               }
+  
+	}
+	else{
+		WC()->cart->remove_cart_item( $cartItemKey );
+	}
+
+}
+
+
+Si queremos hacer dos landingPage con un producto diferente cada una el código será el siguiente:
+
+add_action( 'template_redirect', 'add_product_to_cart' );
+function add_product_to_cart() {
+	$product_id = 154; //replace with your own product id
+	$cartId = WC()->cart->generate_cart_id( 154 );
+	$cartItemKey = WC()->cart->find_product_in_cart( $cartId );
+
+	$eb_product_id = 1489; //replace with your own product id
+	$eb_cartId = WC()->cart->generate_cart_id( 1489 );
+	$eb_cartItemKey = WC()->cart->find_product_in_cart( $eb_cartId );
+
+	if (is_page( 9 ) ) {
+		//check if product already in cart
+               if(!$cartItemKey){
+		    WC()->cart->add_to_cart( $product_id );
+               }
+  
+	}
+	else{
+		WC()->cart->remove_cart_item( $cartItemKey );
+	}
+
+
+	if (is_page( 1440 ) ) {
+		//check if product already in cart
+               if(!$eb_cartItemKey){
+		    WC()->cart->add_to_cart( $eb_product_id );
+               }
+  
+	}
+	else{
+		WC()->cart->remove_cart_item( $eb_cartItemKey );
+	}
+}
