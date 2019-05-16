@@ -1,8 +1,8 @@
-Cuando queremos vender un producto específico en una página en concreto (por ejemplo una Landing page) se nos plantean varías necesidades.
-1- Primero ha de estar el producto ya en el carrito, pero sin que lo añada el cliente. Es decir, cuando entremos a la Landin gpage ha de estar ya el producto en el carrito. Y cuando se abandone la landing eliminar el producto.
-2- Dependiendo de en que landing nos encontremos ha de meter un producto u otro, así que podemos traducir para que se entienda el lenguaje PHP:
+Cuando queremos vender un producto específico en una página en concreto (por ejemplo una LandingPage) se nos plantean varias necesidades.
+1- Primero ha de estar el producto ya en el carrito, pero sin que lo añada el cliente. Es decir, cuando entremos a la LandingPage ha de estar ya el producto en el carrito. Y cuando se abandone la landing eliminar el producto.
+2- Dependiendo de en qué landing nos encontremos ha de meter un producto u otro, así que podemos traducir para que se entienda el lenguaje PHP:
 
- Si nos encontramos en la pagina con ID 9(ejemplo) hay que añadir al carrito el producto con ID 154 (ejemplo). Si no estamos en la landing con ID 9 eliminar el producto con ID 154.
+ Si nos encontramos en la página con ID 9(ejemplo) hay que añadir al carrito el producto con ID 154 (ejemplo). Si no estamos en la landing con ID 9 eliminar el producto con ID 154.
 
 Dicho con Lenguaje PHP:
 
@@ -61,3 +61,5 @@ function add_product_to_cart() {
 		WC()->cart->remove_cart_item( $eb_cartItemKey );
 	}
 }
+
+
